@@ -2,6 +2,7 @@ package org.models.core.domain;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.models.core.domain.report.AutomobileType;
@@ -41,6 +42,7 @@ public abstract class Vehicle {
     private RTO rto;
     @NotNull
     @MakeValidator
+    @ApiModelProperty(allowableValues = "hyundai, kia")
     private String make;
     @NotNull
     @ModelValidator
