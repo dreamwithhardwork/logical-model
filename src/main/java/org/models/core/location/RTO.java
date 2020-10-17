@@ -14,14 +14,17 @@ public class RTO {
 
     @Id
     private String id;
+    //KA07
     @NotNull
     private String code;
     @NotNull
     private String state;
     @NotNull
     private String district;
-    @NotBlank
+    //
+    @NotNull
     private Boolean operating;
+
     @NotBlank
     private String location;
 

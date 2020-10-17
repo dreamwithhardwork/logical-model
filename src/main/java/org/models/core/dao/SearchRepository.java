@@ -23,6 +23,19 @@ public interface SearchRepository{
     @Query("{'transmission': ?0}")
     List<Vehicle> findVehiclesByTransmissionAndAutomobileType(Transmission transmission, AutomobileType type);
     List<Vehicle> findByMileageBetweenAndAutomobileType(Integer from,Integer to, AutomobileType type);
+
+    //
+    List<Vehicle> findByAutomobileTypeAndStatus(AutomobileType type, String status);
+    List<Vehicle> findByMakeAndAutomobileTypeAndStatus(String make, AutomobileType type, String status);
+    List<Vehicle> findByModelAndAutomobileTypeAndStatus(String model, AutomobileType type, String status);
+    List<Vehicle> findByColorAndAutomobileTypeAndStatus(String color,AutomobileType type, String status);
+    List<Vehicle> findByPriceBetweenAndAutomobileTypeAndStatus(Float min, Float max, AutomobileType type, String status);
+    List<Vehicle> findByMakeYearAndTypeAndStatus(Integer year,AutomobileType type, String status);
+    @Query("{'fueltype': ?0}")
+    List<Vehicle> findVehiclesByFuelTypeAndAutomobileTypeAndStatus(String fuelType, AutomobileType type, String status);
+    @Query("{'transmission': ?0}")
+    List<Vehicle> findVehiclesByTransmissionAndAutomobileTypeAndStatus(Transmission transmission, AutomobileType type, String status);
+    List<Vehicle> findByMileageBetweenAndAutomobileTypeAndStatus(Integer from,Integer to, AutomobileType type, String status);
 /*
     @Query("{'year' :  ?0 , automobiletype: ?1 }")
     List<Vehicle> findVehicleByYearAndType(Integer year,AutomobileType type);
