@@ -42,7 +42,7 @@ public abstract class Vehicle {
     private RTO rto;
     @NotNull
     @MakeValidator
-    @ApiModelProperty(allowableValues = "hyundai, kia")
+    //@ApiModelProperty(allowableValues = "hyundai, kia")
     private String make;
     @NotNull
     @ModelValidator
