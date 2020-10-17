@@ -29,10 +29,16 @@ public class SearchFilterRepositoryImpl implements SearchFilterRepository {
                 if(entry.getKey().equals("year") ){
                     criteria.and(entry.getKey()).is(Integer.valueOf(entry.getValue()));
                 }
-                else if(entry.getKey().equals("mileage")){
+                else if(entry.getKey().equals("minMileage")){
+                    criteria.and(entry.getKey()).gte(Integer.valueOf(entry.getValue()));
+                }
+                else if(entry.getKey().equals("maxMileage")){
                     criteria.and(entry.getKey()).lte(Integer.valueOf(entry.getValue()));
                 }
-                else if(entry.getKey().equals("price")){
+                else if(entry.getKey().equals("minPrice")){
+                    criteria.and(entry.getKey()).gte(Float.valueOf(entry.getValue()));
+                }
+                else if(entry.getKey().equals("maxPrice")){
                     criteria.and(entry.getKey()).lte(Float.valueOf(entry.getValue()));
                 }
                 else{

@@ -10,12 +10,4 @@ import org.models.core.domain.report.BikeInspectionReport;
 @JsonTypeName("BIKE")
 public class Bike extends Vehicle {
     private BikeInspectionReport bikeInspectionReport;
-
-    public BikeInspectionReport getBikeInspectionReport() {
-        return bikeInspectionReport;
-    }
-
-    public void setBikeInspectionReport(BikeInspectionReport bikeInspectionReport) {
-        this.bikeInspectionReport = bikeInspectionReport;
-    }
 }

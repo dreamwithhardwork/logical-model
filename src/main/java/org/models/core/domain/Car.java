@@ -12,12 +12,4 @@ import org.models.core.domain.report.CarInspectionReport;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Car extends Vehicle {
     private CarInspectionReport carInspectionReport;
-
-    public CarInspectionReport getCarInspectionReport() {
-        return carInspectionReport;
-    }
-
-    public void setCarInspectionReport(CarInspectionReport carInspectionReport) {
-        this.carInspectionReport = carInspectionReport;
-    }
 }
