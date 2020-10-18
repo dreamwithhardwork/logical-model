@@ -19,8 +19,11 @@ repositories {
     mavenCentral()
     jcenter()
 }
+
 group = 'org.logical.models'
 version = '0.0.1'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
