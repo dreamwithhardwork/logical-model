@@ -1,11 +1,14 @@
 package org.models.core.auth;
 
 import io.jsonwebtoken.*;
+import org.models.core.users.RegisteredUser;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.*;
 
+@Component
 public class JwtTokenUtil implements Serializable {
     private static final long serialVersionUID = -2550185165626007488L;
 
@@ -35,5 +38,16 @@ public class JwtTokenUtil implements Serializable {
         Date validity = claims.getExpiration();
         Date current = new Date();
         return current.before(validity);
+    }
+
+    public String generateToken(RegisteredUser user) {
+        Map<String,Object> claims = new HashMap<>();
+        String token = Jwts.builder().setClaims(claims).setSubject(user.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis()+1000 *expiry))
+                .signWith(SignatureAlgorithm.HS256,secret)
+                .compact();
+        return token;
+
     }
 }

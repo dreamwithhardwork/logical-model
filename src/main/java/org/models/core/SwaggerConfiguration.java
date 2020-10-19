@@ -2,6 +2,7 @@ package org.models.core;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -18,6 +19,11 @@ public class SwaggerConfiguration {
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .paths(PathSelectors.any())
                 .build();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder getEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }

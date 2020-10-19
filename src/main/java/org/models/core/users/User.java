@@ -1,9 +1,14 @@
 package org.models.core.users;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class User {
-    protected String name;
-    protected Long mobile;
-    protected String email;
-    protected String password;
+    private String name;
+    private Long mobile;
+    private String email;
+    private String password;
 }
