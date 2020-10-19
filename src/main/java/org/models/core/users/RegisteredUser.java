@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 public class RegisteredUser extends User {
     private String username;
-    private String password;
     private boolean active;
     private Set<String> roles;
     private List<Address> address;

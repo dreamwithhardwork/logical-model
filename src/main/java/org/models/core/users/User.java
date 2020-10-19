@@ -5,4 +5,5 @@ public class User {
     protected String name;
     protected Long mobile;
     protected String email;
+    protected String password;
 }
