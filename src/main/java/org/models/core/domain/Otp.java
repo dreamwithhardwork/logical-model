@@ -19,7 +19,7 @@ public class Otp {
     @NotEmpty
     private String username;
     @NotEmpty
-    private Integer otp;
+    private String otp;
     @NotEmpty
     @Indexed(direction = IndexDirection.DESCENDING)
     private Date date;

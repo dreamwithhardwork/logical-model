@@ -45,7 +45,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterAfter(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs","/**/*swagger*/**","/health","/**/login/**","/**/signup/**","/swagger-resources/**","/webjars/**")
+                .antMatchers("/v2/api-docs","/**/*swagger*/**","/health","/**/auth/**","/**/otp/**","/swagger-resources/**","/webjars/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

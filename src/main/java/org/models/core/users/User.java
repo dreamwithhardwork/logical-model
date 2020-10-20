@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class User {
     private String name;
-    private Long mobile;
+    private String mobile;
     private String email;
     private String password;
 }

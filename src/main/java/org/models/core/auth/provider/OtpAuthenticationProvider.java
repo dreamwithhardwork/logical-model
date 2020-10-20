@@ -13,6 +13,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class OtpAuthenticationProvider implements AuthenticationProvider {
 
@@ -32,24 +34,30 @@ public class OtpAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
-        Integer otp = (Integer) authentication.getCredentials();
+        String otp = (String) authentication.getCredentials();
 
         Otp otpObject = otpRepository.findByUsername(username);
+        Date now = new Date();
+        Boolean valid = (otpObject!=null  && ((now.getTime() - otpObject.getDate().getTime())/1000)<50);
+
+        if(!valid){
+           throw  new BadCredentialsException("Otp validation failed");
+        }
         RegisteredUser user= usersRepository.findOneByEmail(username);
         if(user ==null){
             user = usersRepository.findOneByMobile(username);
         }
         if(user==null){
-            throw new BadCredentialsException(":(");
+            throw new BadCredentialsException("No user found");
         }
 
-        if (otpObject.getOtp().equals(otp)) {
+        if (bCryptPasswordEncoder.matches(otp, otpObject.getOtp())) {
             OtpAuthentication auth = new OtpAuthentication(username, bCryptPasswordEncoder.encode(user.getPassword()));
             auth.setDetails(user);
             return auth;
         }
 
-        throw new BadCredentialsException(":(");
+        throw new BadCredentialsException("password or otp did not match");
     }
 
     @Override
