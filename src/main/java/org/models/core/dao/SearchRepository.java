@@ -3,6 +3,7 @@ package org.models.core.dao;
 import org.models.core.domain.Transmission;
 import org.models.core.domain.Vehicle;
 import org.models.core.domain.report.AutomobileType;
+import org.models.core.enums.VehicleStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Query;
@@ -25,17 +26,17 @@ public interface SearchRepository{
     List<Vehicle> findByMileageBetweenAndAutomobileType(Integer from,Integer to, AutomobileType type);
 
     //
-    List<Vehicle> findByAutomobileTypeAndStatus(AutomobileType type, String status);
-    List<Vehicle> findByMakeAndAutomobileTypeAndStatus(String make, AutomobileType type, String status);
-    List<Vehicle> findByModelAndAutomobileTypeAndStatus(String model, AutomobileType type, String status);
-    List<Vehicle> findByColorAndAutomobileTypeAndStatus(String color,AutomobileType type, String status);
-    List<Vehicle> findByPriceBetweenAndAutomobileTypeAndStatus(Float min, Float max, AutomobileType type, String status);
-    List<Vehicle> findByMakeYearAndTypeAndStatus(Integer year,AutomobileType type, String status);
+    List<Vehicle> findByAutomobileTypeAndStatus(AutomobileType type, VehicleStatus status);
+    List<Vehicle> findByMakeAndAutomobileTypeAndStatus(String make, AutomobileType type, VehicleStatus status);
+    List<Vehicle> findByModelAndAutomobileTypeAndStatus(String model, AutomobileType type, VehicleStatus status);
+    List<Vehicle> findByColorAndAutomobileTypeAndStatus(String color,AutomobileType type, VehicleStatus status);
+    List<Vehicle> findByPriceBetweenAndAutomobileTypeAndStatus(Float min, Float max, AutomobileType type, VehicleStatus status);
+    List<Vehicle> findByMakeYearAndTypeAndStatus(Integer year,AutomobileType type, VehicleStatus status);
     @Query("{'fueltype': ?0}")
-    List<Vehicle> findVehiclesByFuelTypeAndAutomobileTypeAndStatus(String fuelType, AutomobileType type, String status);
+    List<Vehicle> findVehiclesByFuelTypeAndAutomobileTypeAndStatus(String fuelType, AutomobileType type, VehicleStatus status);
     @Query("{'transmission': ?0}")
-    List<Vehicle> findVehiclesByTransmissionAndAutomobileTypeAndStatus(Transmission transmission, AutomobileType type, String status);
-    List<Vehicle> findByMileageBetweenAndAutomobileTypeAndStatus(Integer from,Integer to, AutomobileType type, String status);
+    List<Vehicle> findVehiclesByTransmissionAndAutomobileTypeAndStatus(Transmission transmission, AutomobileType type, VehicleStatus status);
+    List<Vehicle> findByMileageBetweenAndAutomobileTypeAndStatus(Integer from,Integer to, AutomobileType type, VehicleStatus status);
 /*
     @Query("{'year' :  ?0 , automobiletype: ?1 }")
     List<Vehicle> findVehicleByYearAndType(Integer year,AutomobileType type);

@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.models.core.domain.report.AutomobileType;
+import org.models.core.enums.VehicleStatus;
 import org.models.core.location.RTO;
 import org.models.core.users.UnRegisteredUser;
 import org.models.core.validators.MakeValidator;
@@ -38,7 +39,7 @@ public abstract class Vehicle {
     private Integer noOfOwners;
     //vehicle status (sold, tosell, verification..)
     //@NotNull
-    private String status;
+    private VehicleStatus status;
     private RTO rto;
     @NotNull
     @MakeValidator
