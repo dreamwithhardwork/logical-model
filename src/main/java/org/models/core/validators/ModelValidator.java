@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Constraint(validatedBy = ModelValidatorImpl.class)
 public @interface ModelValidator {
     String message() default "Invalid model type";

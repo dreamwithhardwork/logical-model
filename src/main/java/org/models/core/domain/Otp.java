@@ -1,5 +1,6 @@
 package org.models.core.domain;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -22,5 +23,6 @@ public class Otp {
     private String otp;
     @NotEmpty
     @Indexed(direction = IndexDirection.DESCENDING)
-    private Date date;
+    @JacksonInject
+    private Date date = new Date();
 }

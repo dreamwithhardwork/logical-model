@@ -1,13 +1,11 @@
 package org.models.core.dao;
 
-import org.models.core.domain.Transmission;
+import org.models.core.enums.Transmission;
 import org.models.core.domain.Vehicle;
-import org.models.core.domain.report.AutomobileType;
+import org.models.core.enums.AutomobileType;
+import org.models.core.enums.FuelType;
 import org.models.core.enums.VehicleStatus;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Query;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ public interface SearchRepository{
     List<Vehicle> findByPriceBetweenAndAutomobileType(Float min, Float max, AutomobileType type);
     List<Vehicle> findByMakeYearAndType(Integer year,AutomobileType type);
     @Query("{'fueltype': ?0}")
-    List<Vehicle> findVehiclesByFuelTypeAndAutomobileType(String fuelType, AutomobileType type);
+    List<Vehicle> findVehiclesByFuelTypeAndAutomobileType(FuelType fuelType, AutomobileType type);
     @Query("{'transmission': ?0}")
     List<Vehicle> findVehiclesByTransmissionAndAutomobileType(Transmission transmission, AutomobileType type);
     List<Vehicle> findByMileageBetweenAndAutomobileType(Integer from,Integer to, AutomobileType type);
@@ -33,7 +31,7 @@ public interface SearchRepository{
     List<Vehicle> findByPriceBetweenAndAutomobileTypeAndStatus(Float min, Float max, AutomobileType type, VehicleStatus status);
     List<Vehicle> findByMakeYearAndTypeAndStatus(Integer year,AutomobileType type, VehicleStatus status);
     @Query("{'fueltype': ?0}")
-    List<Vehicle> findVehiclesByFuelTypeAndAutomobileTypeAndStatus(String fuelType, AutomobileType type, VehicleStatus status);
+    List<Vehicle> findVehiclesByFuelTypeAndAutomobileTypeAndStatus(FuelType fuelType, AutomobileType type, VehicleStatus status);
     @Query("{'transmission': ?0}")
     List<Vehicle> findVehiclesByTransmissionAndAutomobileTypeAndStatus(Transmission transmission, AutomobileType type, VehicleStatus status);
     List<Vehicle> findByMileageBetweenAndAutomobileTypeAndStatus(Integer from,Integer to, AutomobileType type, VehicleStatus status);

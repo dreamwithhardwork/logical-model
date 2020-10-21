@@ -1,4 +1,4 @@
-package org.models.core.domain;
+package org.models.core.enums;
 
 public interface ImageType {
 }

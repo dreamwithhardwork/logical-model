@@ -1,5 +1,6 @@
 package org.models.core.domain.report;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface SearchFilterRepository {
-    List<Vehicle> getVehiclesByFilter(Map<String,String> filter);
+    List<Vehicle> getVehiclesByFilter(Map<String,Object> filter);
 }
