@@ -3,6 +3,7 @@ package org.models.core.users;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
+import org.models.core.enums.Roles;
 import org.models.core.location.Address;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,6 +16,6 @@ import java.util.Set;
 public class RegisteredUser extends User {
     private String username;
     private boolean active;
-    private Set<String> roles;
+    private List<Roles> roles;
     private List<Address> address;
 }
