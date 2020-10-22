@@ -14,6 +14,7 @@ import org.models.core.validators.VehicleValidator;
 import javax.validation.constraints.NotNull;
 import java.time.Month;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -57,5 +58,8 @@ public abstract class Vehicle {
     private Integer mileage;
     private Float price;
     private Address vehicleAddress;
+
+    @JsonIgnore
+    private List<Booking> bookings;
 
 }

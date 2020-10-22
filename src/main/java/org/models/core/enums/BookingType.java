@@ -1,4 +1,4 @@
 package org.models.core.enums;
 
-public enum ImageType {
+public enum  BookingType {
 }

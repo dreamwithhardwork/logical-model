@@ -1,6 +1,8 @@
 package org.models.core.users;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.models.core.validators.UserValidator;
@@ -15,5 +17,5 @@ public class User {
     private String mobile;
     @Indexed(sparse = true, unique = true)
     private String email;
-    private String password;
+
 }

@@ -1,6 +1,8 @@
 package org.models.core.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.Roles;
@@ -14,8 +16,8 @@ import java.util.Set;
 @Setter
 @Document(collection = "users")
 public class RegisteredUser extends User {
-    private String username;
     private boolean active;
     private List<Roles> roles;
     private List<Address> address;
+    private String password;
 }
