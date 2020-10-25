@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -12,5 +13,5 @@ import java.util.List;
 @Builder
 public class MakeError {
     private String message;
-    private List<String> availableMakeTypes;
+    private Set<String> availableTypes;
 }

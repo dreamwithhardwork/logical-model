@@ -1,5 +1,7 @@
 package org.models.core.validators;
 
+import org.models.core.validators.impl.ModelValidatorImpl;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
