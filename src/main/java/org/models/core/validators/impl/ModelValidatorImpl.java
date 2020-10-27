@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,8 +56,10 @@ public class ModelValidatorImpl implements ConstraintValidator<ModelValidator, O
         boolean valid = make.getModels().contains(modelName);
         if(!valid){
             try {
+                Set<String> models = new HashSet<>();
+                make.getModels().forEach(model -> models.add(model.getName()));
                 String errorMessage = objectMapper.writeValueAsString(MakeError.builder().message("Invalid Model type").
-                        availableTypes(make.getModels()).build());
+                        availableTypes(models).build());
                 constraintValidatorContext.disableDefaultConstraintViolation();
                 constraintValidatorContext.buildConstraintViolationWithTemplate(errorMessage).addConstraintViolation();
             } catch (JsonProcessingException e) {

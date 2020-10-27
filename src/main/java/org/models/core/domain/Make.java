@@ -24,6 +24,6 @@ public class Make {
     private String logoUrl;
     @NotNull
     private MakeType type;
-    private Set<String> models;
+    private Set<Model> models;
 
 }

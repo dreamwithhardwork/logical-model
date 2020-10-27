@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class PropertiesListener implements ApplicationListener<ContextRefreshedE
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         List<Make> makes = makeRepository.findAll();
-        System.out.println(makes.toString());
+        makes = makes==null?new ArrayList<>():makes;
         makes.forEach(make ->
         {
             if(vehicleProperties.getMakes()==null)
