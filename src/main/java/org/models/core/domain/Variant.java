@@ -52,4 +52,6 @@ public class Variant {
     private Map<String,String> interiorImages;
     private Map<String,String> exteriorImages;
 
+    private AvailableCarProperties specifications;
+
 }

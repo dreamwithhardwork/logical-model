@@ -1,12 +1,11 @@
 package org.models.core;
 
-import org.models.core.dao.MakeRepository;
+import org.models.core.dao.CustomRepositories;
 import org.models.core.domain.Make;
 import org.models.core.properies.VehicleProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,14 +16,14 @@ public class PropertiesListener implements ApplicationListener<ContextRefreshedE
 
 
     @Autowired
-    MakeRepository makeRepository;
+    CustomRepositories makeRepository;
 
     @Autowired
     VehicleProperties vehicleProperties;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        List<Make> makes = makeRepository.findAll();
+        List<Make> makes = makeRepository.getAllMakes();
         makes = makes==null?new ArrayList<>():makes;
         makes.forEach(make ->
         {

@@ -17,9 +17,9 @@ public interface SearchRepository{
     List<Vehicle> findByColorAndAutomobileType(String color,AutomobileType type);
     List<Vehicle> findByPriceBetweenAndAutomobileType(Float min, Float max, AutomobileType type);
     List<Vehicle> findByMakeYearAndType(Integer year,AutomobileType type);
-    @Query("{'fueltype': ?0}")
+    @Query("{'variant.fueltype': ?0, 'automobileType': ?1}")
     List<Vehicle> findVehiclesByFuelTypeAndAutomobileType(FuelType fuelType, AutomobileType type);
-    @Query("{'transmission': ?0}")
+    @Query("{'variant.transmission': ?0, 'automobileType': ?1}")
     List<Vehicle> findVehiclesByTransmissionAndAutomobileType(Transmission transmission, AutomobileType type);
     List<Vehicle> findByMileageBetweenAndAutomobileType(Integer from,Integer to, AutomobileType type);
 
@@ -30,9 +30,9 @@ public interface SearchRepository{
     List<Vehicle> findByColorAndAutomobileTypeAndStatus(String color,AutomobileType type, VehicleStatus status);
     List<Vehicle> findByPriceBetweenAndAutomobileTypeAndStatus(Float min, Float max, AutomobileType type, VehicleStatus status);
     List<Vehicle> findByMakeYearAndTypeAndStatus(Integer year,AutomobileType type, VehicleStatus status);
-    @Query("{'fueltype': ?0}")
+    @Query("{'variant.fueltype': ?0, 'automobileType': ?1, 'status': ?2}")
     List<Vehicle> findVehiclesByFuelTypeAndAutomobileTypeAndStatus(FuelType fuelType, AutomobileType type, VehicleStatus status);
-    @Query("{'transmission': ?0}")
+    @Query("{'variant.transmission': ?0, 'automobileType': ?1, 'status': ?2}")
     List<Vehicle> findVehiclesByTransmissionAndAutomobileTypeAndStatus(Transmission transmission, AutomobileType type, VehicleStatus status);
     List<Vehicle> findByMileageBetweenAndAutomobileTypeAndStatus(Integer from,Integer to, AutomobileType type, VehicleStatus status);
 /*

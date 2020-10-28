@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Document
-public class AvailableVehicleProperties {
+public class AvailableCarProperties {
     private List<VehicleProperty> engine;
     private List<VehicleProperty> fuel;
     private List<VehicleProperty> suspension;

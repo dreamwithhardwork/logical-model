@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ModelRepository extends MongoRepository<Model,String> {
     List<Model> findByMake(String make);
+    Model findOneByName(String name);
 }
