@@ -32,12 +32,12 @@ public class MakeValidatorImpl implements ConstraintValidator<MakeValidator,Stri
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        boolean isValid = vehicleProperties.getMake().contains(s);
+        boolean isValid = vehicleProperties.getMakemodelvariants().keySet().contains(s);
         if(!isValid)
         {
             try {
                 String errorMessage = objectMapper.writeValueAsString(MakeError.builder().message("Invalid make type").
-                        availableTypes(new HashSet<>(vehicleProperties.getMake())).build());
+                        availableTypes(vehicleProperties.getMakemodelvariants().keySet()).build());
                 constraintValidatorContext.disableDefaultConstraintViolation();
                 constraintValidatorContext.buildConstraintViolationWithTemplate(errorMessage).addConstraintViolation();
             } catch (JsonProcessingException e) {

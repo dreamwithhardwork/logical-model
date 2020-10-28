@@ -8,12 +8,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
-@Component
+//@Component
 public class PropertiesListener implements ApplicationListener<ContextRefreshedEvent> {
 
 
@@ -29,9 +28,22 @@ public class PropertiesListener implements ApplicationListener<ContextRefreshedE
         makes = makes==null?new ArrayList<>():makes;
         makes.forEach(make ->
         {
-            if(vehicleProperties.getMakes()==null)
-                vehicleProperties.setMakes(new HashMap<>());
-            vehicleProperties.getMakes().put(make.getName(),make);
+            if(vehicleProperties.getMakemodelvariants()==null)
+                vehicleProperties.setMakemodelvariants(new HashMap<>());
+            //vehicleProperties.getMakes().put(make.getName(),make);
+            Map<String, Set<String>> models = new HashMap<>();
+            Map<String,Map<String,Set<String>>> makemodelvariants  = vehicleProperties.getMakemodelvariants();
+            makemodelvariants.put(make.getName(),models);
+            make.getModels().stream().forEach(model -> {
+                Set<String> variants ;
+                if(model.getVariants()==null) variants = new HashSet<>();
+                else {
+                  variants=  model.getVariants().stream().map(variant -> {
+                        return   variant.getVariantName();
+                    }).collect(Collectors.toSet());
+                }
+                models.put(model.getName(),variants);
+            });
         });
     }
 }

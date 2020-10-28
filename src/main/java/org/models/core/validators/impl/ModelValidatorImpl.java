@@ -39,25 +39,20 @@ public class ModelValidatorImpl implements ConstraintValidator<ModelValidator, O
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext constraintValidatorContext) {
-        Make make;
-        String makename ,modelName;
+        Map<String, Set<String>> make;
+        String makename = "" ,modelName="";
         if(obj instanceof Vehicle)
         {
             makename = ((Vehicle)obj).getMake();
             modelName = ((Vehicle)obj).getModel();
         }
-        else {
-            makename = ((Variant)obj).getMake();
-            modelName = ((Variant)obj).getModel();
-        }
-        make = vehicleProperties.getMakes().get(makename);
+        make = vehicleProperties.getMakemodelvariants().get(makename);
 
 
-        boolean valid = make.getModels().contains(modelName);
+        boolean valid = make.keySet().contains(modelName);
         if(!valid){
             try {
-                Set<String> models = new HashSet<>();
-                make.getModels().forEach(model -> models.add(model.getName()));
+                Set<String> models = make.keySet();
                 String errorMessage = objectMapper.writeValueAsString(MakeError.builder().message("Invalid Model type").
                         availableTypes(models).build());
                 constraintValidatorContext.disableDefaultConstraintViolation();

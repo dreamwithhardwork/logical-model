@@ -15,7 +15,5 @@ import java.util.Set;
 @Setter
 @Component
 public class VehicleProperties {
-    private List<String> make;
-    private Map<String,Set<String>> models;
-    private Map<String,Make> makes;
+    private Map<String,Map<String,Set<String>>> makemodelvariants;
 }
