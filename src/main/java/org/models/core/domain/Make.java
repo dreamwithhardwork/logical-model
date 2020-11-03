@@ -33,4 +33,6 @@ public class Make {
     @JsonIgnore
     private List<Model> models;
 
+    private boolean isPopular;
+
 }

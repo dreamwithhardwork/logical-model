@@ -21,5 +21,6 @@ public class User {
     private String mobile;
     @Indexed(sparse = true, unique = true)
     private String email;
+    private String profilePic;
 
 }

@@ -37,4 +37,6 @@ public class Model {
 
     private String logoUrl;
 
+    private  boolean isPopular;
+
 }

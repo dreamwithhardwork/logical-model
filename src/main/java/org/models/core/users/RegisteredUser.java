@@ -20,4 +20,6 @@ public class RegisteredUser extends User {
     private List<Roles> roles;
     private List<Address> address;
     private String password;
+    @JsonIgnore
+    private List<String> wishList;
 }

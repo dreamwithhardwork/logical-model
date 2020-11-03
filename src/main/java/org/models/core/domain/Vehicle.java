@@ -23,20 +23,27 @@ import java.util.List;
 @VehicleValidator
 public abstract class Vehicle {
 
+    //to differentiate vehicle type
     private String type;
     @NotNull
     private Integer makeYear;
     private Month makeMonth;
     private Integer registrationYear;
     private Month registrationMonth;
+
     @NotNull
     private Variant variant;
+
     private String sellerId;
     private String buyerId;
+
+
     @NotNull
     private Integer noOfOwners;
+
     @NotNull
     private VehicleStatus status;
+
     private RTO rto;
     @NotNull
     @MakeValidator
