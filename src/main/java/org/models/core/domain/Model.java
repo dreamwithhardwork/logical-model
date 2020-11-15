@@ -29,7 +29,7 @@ public class Model {
     private String _idname;
     @NotNull
     private String description;
-    private Map<String,String> imagesWithColors;
+    private Map<String,List<String>> imagesWithColors;
     @JsonIgnore
     @Transient
     private List<Variant> variants;
