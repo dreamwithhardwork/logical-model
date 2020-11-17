@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,6 +18,7 @@ import java.util.Map;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Document
+@CompoundIndex(name = "make_model", def = "{'_idname':1,'make':1}")
 public class Model {
 
     @Id
@@ -34,7 +36,6 @@ public class Model {
     @Transient
     private List<Variant> variants;
     @NotNull
-    @Indexed(unique = true)
     private String make;
 
     private String logoUrl;
