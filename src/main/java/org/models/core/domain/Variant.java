@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -21,6 +22,7 @@ import java.util.Map;
 @ModelValidator
 @Document
 @CompoundIndex(name = "variant_index", def = "{'variantName':1, 'fromYear':1, 'toYear':1}", unique = true)
+@CompoundIndex(name = "variant_model", def = "{'variantName':1, 'model':1}", unique = true)
 public class Variant {
 
 
@@ -46,11 +48,10 @@ public class Variant {
     private String bodyType;
 
     @NotNull
-    @Indexed(unique = true)
     private String model;
 
-    private Map<String,String> interiorImages;
-    private Map<String,String> exteriorImages;
+    private Map<String, List<String>> interiorImages;
+    private Map<String,List<String>> exteriorImages;
 
     private AvailableCarProperties specifications;
 
