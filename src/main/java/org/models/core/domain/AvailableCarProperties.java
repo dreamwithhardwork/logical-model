@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -26,5 +27,7 @@ public class AvailableCarProperties {
     private List<VehicleProperty> safety;
     private List<VehicleProperty> entertainment;
     private List<VehicleProperty> communication;*/
+    @Id
+    private String id;
     private Map<String,List<VehicleProperty>> availableProps;
 }
