@@ -5,11 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.ImageType;
 
+import java.util.List;
 import java.util.Map;
 
 @Getter
 @Setter
 public class Images {
-    @JsonAnySetter
-    private Map<String, ImageType> urls;
+
+    private Map<String, List<Images>> urls;
 }

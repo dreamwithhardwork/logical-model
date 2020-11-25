@@ -24,4 +24,5 @@ public class Booking {
     private Date scheduledDate;
     private Time time;
     private BookingStatus status;
+    private String feedback;
 }

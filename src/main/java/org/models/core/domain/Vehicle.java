@@ -44,7 +44,7 @@ public abstract class Vehicle {
     @NotNull
     private VehicleStatus status;
 
-    private RTO rto;
+    private String rto;
     @NotNull
     @MakeValidator
     private String make;

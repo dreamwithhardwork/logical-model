@@ -50,7 +50,7 @@ public class Variant {
     @NotNull
     private String model;
 
-    private Map<String, List<String>> interiorImages;
+    private Map<String,List<String>> interiorImages;
     private Map<String,List<String>> exteriorImages;
 
     private AvailableCarProperties specifications;
