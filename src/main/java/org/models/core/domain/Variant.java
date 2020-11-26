@@ -58,6 +58,6 @@ public class Variant {
     private Map<String,List<String>> interiorImages;
     private Map<String,List<String>> exteriorImages;
 
-    private AvailableCarProperties specifications;
+    private List<Specification> specifications;
 
 }

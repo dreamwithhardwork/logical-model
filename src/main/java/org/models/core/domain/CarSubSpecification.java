@@ -6,7 +6,7 @@ import org.models.core.enums.PropertyDataType;
 
 @Getter
 @Setter
-public class VehicleProperty {
+public class CarSubSpecification {
     private String name;
     private PropertyDataType propertyDataType;
     private String status;

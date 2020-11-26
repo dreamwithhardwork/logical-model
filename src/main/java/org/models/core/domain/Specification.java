@@ -13,11 +13,11 @@ import java.util.List;
 @Getter
 @Setter
 @Document
-public class AvailableCarProperties {
+public class Specification {
     @Id
     private String id;
     @NotNull
     @Indexed(unique = true)
     private String name;
-    private List<VehicleProperty> properties;
+    private List<CarSubSpecification> properties;
 }
