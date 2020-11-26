@@ -50,6 +50,9 @@ public class Variant {
     @NotNull
     private String model;
 
+    @NotNull
+    private Float exShowroomPrice;
+
     private Map<String,List<String>> interiorImages;
     private Map<String,List<String>> exteriorImages;
 
