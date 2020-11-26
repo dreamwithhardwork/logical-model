@@ -27,7 +27,6 @@ public class Variant {
 
 
     @Id
-    @JsonIgnore
     private String _id;
 
     @Indexed(unique = true)
@@ -49,6 +48,9 @@ public class Variant {
 
     @NotNull
     private String model;
+
+    @NotNull
+    private String make;
 
     @NotNull
     private Float exShowroomPrice;
