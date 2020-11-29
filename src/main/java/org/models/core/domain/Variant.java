@@ -7,6 +7,7 @@ import org.models.core.enums.FuelType;
 import org.models.core.enums.Transmission;
 import org.models.core.validators.ModelValidator;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -55,9 +56,10 @@ public class Variant {
     @NotNull
     private Float exShowroomPrice;
 
-    private Map<String,List<String>> interiorImages;
-    private Map<String,List<String>> exteriorImages;
+    private List<Image> interiorImages;
+    private List<Image> exteriorImages;
 
+    @Transient
     private List<Specification> specifications;
 
 }

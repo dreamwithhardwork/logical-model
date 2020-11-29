@@ -52,8 +52,8 @@ public abstract class Vehicle {
     private String model;
     @NotNull
     private AutomobileType automobileType;
-    private Images sellerImages;
-    private Images primaryImages;
+    private List<Image> sellerImages;
+    private List<Image> primaryImages;
 
 
     private Date creationDate=new Date();

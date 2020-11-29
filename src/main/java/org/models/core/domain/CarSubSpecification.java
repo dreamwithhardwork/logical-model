@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.PropertyDataType;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class CarSubSpecification {
@@ -11,4 +13,5 @@ public class CarSubSpecification {
     private PropertyDataType propertyDataType;
     private String status;
     private String value;
+    private List<Image> images;
 }
