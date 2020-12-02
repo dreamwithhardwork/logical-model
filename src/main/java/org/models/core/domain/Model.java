@@ -31,7 +31,7 @@ public class Model {
     private String _idname;
     @NotNull
     private String description;
-    private Map<String,List<String>> imagesWithColors;
+    private Map<String,List<Image>> imagesWithColors;
     @JsonIgnore
     @Transient
     private List<Variant> variants;
