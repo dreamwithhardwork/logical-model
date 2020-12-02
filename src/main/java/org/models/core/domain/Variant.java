@@ -59,7 +59,8 @@ public class Variant {
     private List<Image> interiorImages;
     private List<Image> exteriorImages;
 
-    @Transient
+
+
     private List<Specification> specifications;
 
 }
