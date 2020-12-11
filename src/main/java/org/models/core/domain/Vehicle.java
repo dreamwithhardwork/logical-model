@@ -21,6 +21,7 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({@Type(value = Car.class,name = "CAR"), @Type(value = Bike.class,name = "BIKE")})
 @VehicleValidator
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public abstract class Vehicle {
 
     //to differentiate vehicle type

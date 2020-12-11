@@ -1,6 +1,8 @@
 package org.models.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +21,7 @@ import java.util.Map;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Document
 @CompoundIndex(name = "make_model", def = "{'_idname':1,'make':1}")
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Model {
 
     @Id
@@ -32,9 +35,23 @@ public class Model {
     @NotNull
     private String description;
     private Map<String,List<Image>> imagesWithColors;
-    @JsonIgnore
+
     @Transient
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Variant> variants;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Float minPrice;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Float maxPrice;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Float maxMileage;
+
+    @Transient
+    private Float engineCC;
+
     @NotNull
     private String make;
 

@@ -2,6 +2,8 @@ package org.models.core.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.MakeType;
@@ -19,6 +21,7 @@ import java.util.Set;
 @Setter
 @Document
 @CompoundIndex(def = "{'name':1,'type':1}")
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Make {
 
     @Id
@@ -31,8 +34,9 @@ public class Make {
     private String logoUrl;
     @NotNull
     private MakeType type;
-    @JsonIgnore
+
     @Transient
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Model> models;
 
     private boolean isPopular;
