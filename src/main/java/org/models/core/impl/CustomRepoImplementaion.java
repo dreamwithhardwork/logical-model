@@ -53,11 +53,6 @@ public class CustomRepoImplementaion implements CustomRepositories {
         Aggregation aggregation = Aggregation.newAggregation(lookupOperation,addFields);
         AggregationResults<Model> aggRes = mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Model.class),Model.class);
         List<Model> modelsList = (List<Model>) aggRes.getRawResults().get("results");
-        modelsList.forEach(model -> {
-            model.getVariants().forEach(variant -> {
-                variant.setSpecifications(null);
-            });
-        });
         return modelsList;
     }
 }
