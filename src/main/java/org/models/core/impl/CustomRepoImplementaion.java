@@ -4,6 +4,7 @@ import org.bson.Document;
 import org.models.core.dao.CustomRepositories;
 import org.models.core.domain.Make;
 import org.models.core.domain.Model;
+import org.models.core.enums.MakeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -31,7 +33,25 @@ public class CustomRepoImplementaion implements CustomRepositories {
                 foreignField("make").as("models");
 
         Aggregation aggregation =  Aggregation.newAggregation(lookupOperation);
-        List<Make> makes = mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Make.class),Make.class).getMappedResults();
+
+        List<Document> doc = (List<Document>) mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Make.class),Make.class).getRawResults().get("results");
+        List<Make> makes = new ArrayList<>();
+        doc.forEach(item -> {
+            Make make = new Make();
+            make.set_name(item.getString("_name"));make.setId(item.getString("id"));make.setName(item.getString("name"));
+            make.setLogoUrl(item.getString("logoUrl"));
+            make.setPopular(item.get("isPopular",Boolean.class));
+            List<Model> models = new ArrayList<>();
+
+            List<Document> modDoc = item.get("models",List.class);
+            modDoc.forEach(mo -> {
+                Model model = new Model();
+                model.setName(mo.getString("name"));
+                models.add(model);
+            });
+            make.setModels(models);
+            makes.add(make);
+        });
         return makes;
     }
 

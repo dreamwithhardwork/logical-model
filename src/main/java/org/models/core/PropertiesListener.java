@@ -6,12 +6,13 @@ import org.models.core.properies.VehicleProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 
-//@Component
+@Component
 public class PropertiesListener implements ApplicationListener<ContextRefreshedEvent> {
 
 
@@ -25,8 +26,9 @@ public class PropertiesListener implements ApplicationListener<ContextRefreshedE
     public void onApplicationEvent(ContextRefreshedEvent event) {
         List<Make> makes = makeRepository.getAllMakes();
         makes = makes==null?new ArrayList<>():makes;
-        makes.forEach(make ->
-        {
+        Iterator it =  makes.iterator();
+        while (it.hasNext()){
+            Make make = (Make) it.next();
             if(vehicleProperties.getMakemodelvariants()==null)
                 vehicleProperties.setMakemodelvariants(new HashMap<>());
             //vehicleProperties.getMakes().put(make.getName(),make);
@@ -37,12 +39,12 @@ public class PropertiesListener implements ApplicationListener<ContextRefreshedE
                 Set<String> variants ;
                 if(model.getVariants()==null) variants = new HashSet<>();
                 else {
-                  variants=  model.getVariants().stream().map(variant -> {
+                    variants=  model.getVariants().stream().map(variant -> {
                         return   variant.getVariantName();
                     }).collect(Collectors.toSet());
                 }
                 models.put(model.getName(),variants);
             });
-        });
+        }
     }
 }
