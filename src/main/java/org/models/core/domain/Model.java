@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -49,8 +50,11 @@ public class Model {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Float maxMileage;
 
-    @Transient
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Float engineCC;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Set<String> fuelTypes;
 
     @NotNull
     private String make;

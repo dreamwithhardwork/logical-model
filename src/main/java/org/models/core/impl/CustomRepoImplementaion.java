@@ -47,7 +47,9 @@ public class CustomRepoImplementaion implements CustomRepositories {
             @Override
             public Document toDocument(AggregationOperationContext context) {
                 return new Document("$addFields", new Document("maxPrice", new Document("$max","$variants.exShowroomPrice")).
-                        append("minPrice", new Document("$min","$variants.exShowroomPrice")));
+                        append("minPrice", new Document("$min","$variants.exShowroomPrice"))
+                        .append("fuelTypes",new Document("$setUnion",Arrays.asList(new ArrayList(),"$variants.fuelType")))
+                        );
             }
         };
         Aggregation aggregation = Aggregation.newAggregation(lookupOperation,addFields);
