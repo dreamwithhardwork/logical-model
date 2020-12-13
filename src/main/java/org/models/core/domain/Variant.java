@@ -23,8 +23,8 @@ import java.util.Map;
 @Setter
 @ModelValidator
 @Document
-@CompoundIndex(name = "variant_index", def = "{'variantName':1, 'fromYear':1, 'toYear':1}", unique = true)
-@CompoundIndex(name = "variant_model", def = "{'variantName':1, 'model':1}", unique = true)
+@CompoundIndex(name = "variant_index", def = "{'_variantName':1, 'model':1, 'fromYear':1, 'toYear':1}", unique = true)
+@CompoundIndex(name = "variant_model", def = "{'_variantName':1, 'model':1}", unique = true)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Variant {
 
@@ -32,10 +32,10 @@ public class Variant {
     @Id
     private String _id;
 
-    @Indexed(unique = true)
-    @JsonIgnore
+    @NotNull
     private String _variantName;
 
+    @NotNull
     private String variantName;
 
     @NotNull

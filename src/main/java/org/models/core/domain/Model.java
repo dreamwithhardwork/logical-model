@@ -30,11 +30,13 @@ public class Model {
 
     @EqualsAndHashCode.Include
     private String name;
-
     @Indexed(unique = true)
     private String _idname;
     @NotNull
     private String description;
+    @NotNull
+    private String bodyType;
+
     private Map<String,List<Image>> imagesWithColors;
 
     @Transient
