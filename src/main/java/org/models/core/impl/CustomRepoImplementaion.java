@@ -4,11 +4,14 @@ import org.bson.Document;
 import org.models.core.dao.CustomRepositories;
 import org.models.core.domain.Make;
 import org.models.core.domain.Model;
+import org.models.core.domain.ModelsFilter;
+import org.models.core.enums.FuelType;
 import org.models.core.enums.MakeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -73,6 +76,49 @@ public class CustomRepoImplementaion implements CustomRepositories {
             }
         };
         Aggregation aggregation = Aggregation.newAggregation(lookupOperation,addFields);
+        AggregationResults<Model> aggRes = mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Model.class),Model.class);
+        List<Model> modelsList = (List<Model>) aggRes.getRawResults().get("results");
+        return modelsList;
+    }
+
+    public List<Model> getAllModels(ModelsFilter filter){
+        Query query = new Query();
+        Criteria criteria = new Criteria();
+        List<String> bodyTypes  = filter.getBodyTypes();
+        List<FuelType> fuelTypes = filter.getFuelTypes();
+        List<String> makeList = filter.getMakeList();
+        Float max =filter.getMaxPrice();
+        Float min = filter.getMinPrice();
+
+        List<Document> bodyTypeDoc = new ArrayList<>();
+        bodyTypes.forEach(type -> bodyTypeDoc.add(new Document("bodyType",type)));
+
+        makeList.forEach(type -> bodyTypeDoc.add(new Document("make",type)));
+
+        AggregationOperation matchOperation = new AggregationOperation() {
+            @Override
+            public Document toDocument(AggregationOperationContext context) {
+                return new Document("$match",
+                        new Document("$or",bodyTypeDoc));
+            }
+        };
+
+
+        LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("variant")
+                .localField("name")
+                .foreignField("model")
+                .as("variants");
+        AggregationOperation addFields = new AggregationOperation() {
+            @Override
+            public Document toDocument(AggregationOperationContext context) {
+                return new Document("$addFields", new Document("maxPrice", new Document("$max","$variants.exShowroomPrice")).
+                        append("minPrice", new Document("$min","$variants.exShowroomPrice"))
+                        .append("fuelTypes",new Document("$setUnion",Arrays.asList(new ArrayList(),"$variants.fuelType")))
+                );
+            }
+        };
+        Aggregation aggregation = Aggregation.newAggregation(matchOperation,lookupOperation,addFields);
         AggregationResults<Model> aggRes = mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Model.class),Model.class);
         List<Model> modelsList = (List<Model>) aggRes.getRawResults().get("results");
         return modelsList;
