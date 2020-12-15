@@ -100,6 +100,12 @@ public class CustomRepoImplementaion implements CustomRepositories {
         makeList.forEach(type -> makeTypeDoc.add(new Document("make",type)));
         finalFilter.add(new Document("$or",makeTypeDoc));
 
+        Document minPriceDoc = new Document("minPrice", new Document("$gte",min));
+        Document maxPriceDoc = new Document("maxPrice", new Document("$lte",max));
+        finalFilter.add(new Document("$and",Arrays.asList(minPriceDoc,maxPriceDoc)));
+
+        finalFilter.add(new Document("fuelType",fuelTypesDoc));
+
 
         AggregationOperation matchOperation = new AggregationOperation() {
             @Override
@@ -124,7 +130,9 @@ public class CustomRepoImplementaion implements CustomRepositories {
                 );
             }
         };
-        Aggregation aggregation = Aggregation.newAggregation(matchOperation,lookupOperation,addFields);
+
+
+        Aggregation aggregation = Aggregation.newAggregation(lookupOperation,addFields,matchOperation);
         AggregationResults<Model> aggRes = mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Model.class),Model.class);
         List<Model> modelsList = (List<Model>) aggRes.getRawResults().get("results");
         return modelsList;
