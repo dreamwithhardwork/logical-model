@@ -90,16 +90,22 @@ public class CustomRepoImplementaion implements CustomRepositories {
         Float max =filter.getMaxPrice();
         Float min = filter.getMinPrice();
 
+        List<Document> finalFilter = new ArrayList<>();
+
         List<Document> bodyTypeDoc = new ArrayList<>();
         bodyTypes.forEach(type -> bodyTypeDoc.add(new Document("bodyType",type)));
+        finalFilter.add(new Document("$or",bodyTypeDoc));
 
-        makeList.forEach(type -> bodyTypeDoc.add(new Document("make",type)));
+        List<Document> makeTypeDoc = new ArrayList<>();
+        makeList.forEach(type -> makeTypeDoc.add(new Document("make",type)));
+        finalFilter.add(new Document("$or",makeTypeDoc));
+
 
         AggregationOperation matchOperation = new AggregationOperation() {
             @Override
             public Document toDocument(AggregationOperationContext context) {
                 return new Document("$match",
-                        new Document("$or",bodyTypeDoc));
+                        new Document("$and", finalFilter));
             }
         };
 
