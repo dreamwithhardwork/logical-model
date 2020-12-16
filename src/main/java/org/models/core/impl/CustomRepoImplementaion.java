@@ -94,11 +94,16 @@ public class CustomRepoImplementaion implements CustomRepositories {
 
         List<Document> bodyTypeDoc = new ArrayList<>();
         bodyTypes.forEach(type -> bodyTypeDoc.add(new Document("bodyType",type)));
-        finalFilter.add(new Document("$or",bodyTypeDoc));
+        if (bodyTypeDoc.size()!=0){
+            finalFilter.add(new Document("$or",bodyTypeDoc));
+        }
 
         List<Document> makeTypeDoc = new ArrayList<>();
         makeList.forEach(type -> makeTypeDoc.add(new Document("make",type)));
-        finalFilter.add(new Document("$or",makeTypeDoc));
+        if(makeTypeDoc.size() !=0){
+            finalFilter.add(new Document("$or",makeTypeDoc));
+        }
+
 
         Document minPriceDoc = new Document("minPrice", new Document("$gte",min));
         Document maxPriceDoc = new Document("maxPrice", new Document("$lte",max));
