@@ -104,8 +104,6 @@ public class CustomRepoImplementaion implements CustomRepositories {
         Document maxPriceDoc = new Document("maxPrice", new Document("$lte",max));
         finalFilter.add(new Document("$and",Arrays.asList(minPriceDoc,maxPriceDoc)));
 
-        finalFilter.add(new Document("fuelType",fuelTypesDoc));
-
 
         AggregationOperation matchOperation = new AggregationOperation() {
             @Override
