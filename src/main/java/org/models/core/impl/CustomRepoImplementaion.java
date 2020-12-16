@@ -7,6 +7,7 @@ import org.models.core.domain.Model;
 import org.models.core.domain.ModelsFilter;
 import org.models.core.enums.FuelType;
 import org.models.core.enums.MakeType;
+import org.models.core.enums.Transmission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
@@ -86,6 +87,7 @@ public class CustomRepoImplementaion implements CustomRepositories {
         Criteria criteria = new Criteria();
         List<String> bodyTypes  = filter.getBodyTypes();
         List<FuelType> fuelTypes = filter.getFuelTypes();
+        List<Transmission> transmissionType = filter.getTransmissionList();
         List<String> makeList = filter.getMakeList();
         Float max =filter.getMaxPrice();
         Float min = filter.getMinPrice();
@@ -102,6 +104,18 @@ public class CustomRepoImplementaion implements CustomRepositories {
         makeList.forEach(type -> makeTypeDoc.add(new Document("make",type)));
         if(makeTypeDoc.size() !=0){
             finalFilter.add(new Document("$or",makeTypeDoc));
+        }
+
+        List<Document> transmissionTypeDoc = new ArrayList<>();
+        transmissionType.forEach(type -> transmissionTypeDoc.add(new Document("variants.transmission",type)));
+        if(transmissionTypeDoc.size() !=0){
+            finalFilter.add(new Document("$or",transmissionTypeDoc));
+        }
+
+        List<Document> fuelTypeDoc = new ArrayList<>();
+        fuelTypes.forEach(type -> fuelTypeDoc.add(new Document("variants.fuelType",type)));
+        if(fuelTypeDoc.size() !=0){
+            finalFilter.add(new Document("$or",fuelTypeDoc));
         }
 
 
@@ -124,13 +138,13 @@ public class CustomRepoImplementaion implements CustomRepositories {
                 .localField("name")
                 .foreignField("model")
                 .as("variants");
+
         AggregationOperation addFields = new AggregationOperation() {
             @Override
             public Document toDocument(AggregationOperationContext context) {
-                return new Document("$addFields", new Document("maxPrice", new Document("$max","$variants.exShowroomPrice")).
-                        append("minPrice", new Document("$min","$variants.exShowroomPrice"))
-                        .append("fuelTypes",new Document("$setUnion",Arrays.asList(new ArrayList(),"$variants.fuelType")))
-                );
+                return new Document("$addFields", new Document("maxPrice", new Document("$max","$variants.exShowroomPrice"))
+                          .append("minPrice", new Document("$min","$variants.exShowroomPrice"))
+                          .append("fuelTypes",new Document("$setUnion",Arrays.asList(new ArrayList(),"$variants.fuelType"))));
             }
         };
 
