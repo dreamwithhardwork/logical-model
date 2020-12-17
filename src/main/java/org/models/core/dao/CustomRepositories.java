@@ -10,4 +10,5 @@ public interface CustomRepositories {
     List<Make> getAllMakes();
     List<Model> getAllModels();
     List<Model> getAllModels(ModelsFilter filter);
+    Model getModelByName(String name);
 }

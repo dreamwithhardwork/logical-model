@@ -65,6 +65,7 @@ public class Variant {
     private List<Image> interiorImages;
     private List<Image> exteriorImages;
 
+
     private List<Specification> specifications;
 
 }

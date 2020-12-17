@@ -6,19 +6,16 @@ import org.models.core.domain.Make;
 import org.models.core.domain.Model;
 import org.models.core.domain.ModelsFilter;
 import org.models.core.enums.FuelType;
-import org.models.core.enums.MakeType;
 import org.models.core.enums.Transmission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 
@@ -153,5 +150,33 @@ public class CustomRepoImplementaion implements CustomRepositories {
         AggregationResults<Model> aggRes = mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Model.class),Model.class);
         List<Model> modelsList = (List<Model>) aggRes.getRawResults().get("results");
         return modelsList;
+    }
+
+    @Override
+    public Model getModelByName(String name) {
+        AggregationOperation matchOperation = new AggregationOperation() {
+            @Override
+            public Document toDocument(AggregationOperationContext context) {
+                return new Document("$match",
+                        new Document("name", name));
+            }
+        };
+        LookupOperation lookupOperation = LookupOperation.newLookup()
+                .from("variant")
+                .localField("name")
+                .foreignField("model")
+                .as("variants");
+        Aggregation aggregation = Aggregation.newAggregation(matchOperation,lookupOperation);
+        AggregationResults<Model> aggRes = mongoTemplate.aggregate(aggregation,mongoTemplate.getCollectionName(Model.class),Model.class);
+        List<Model> res =  aggRes.getMappedResults();
+        Model model = null;
+        if(res.size()!=0){
+            model = res.get(0);
+           List<Document>  doc =  aggRes.getRawResults().get("results",List.class);
+           model.setVariants(doc.get(0).get("variants",List.class));
+        }
+
+        return model;
+
     }
 }
