@@ -10,5 +10,4 @@ import java.util.List;
 public class ReportObject extends CarSubSpecification {
     private String report;
     private String description;
-    private List<Image> images;
 }

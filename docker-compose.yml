@@ -1,0 +1,19 @@
+version: '2'
+services:
+  admin-server:
+    container_name: admin-service
+    image: srikanthbathi/admin-service:latest
+    ports:
+      - 8080:8080
+  external-server:
+    container_name: external-service
+    image: srikanthbathi/external-service:latest
+    ports:
+      - 8082:8082
+  message-server:
+    container_name: message-service
+    build:
+      context: /Users/bathi/Documents/autoride/authentication-text
+    image: message-service:latest
+    ports:
+      - 8081:8081
