@@ -13,10 +13,15 @@ import java.util.List;
 @Getter
 @Setter
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class Specification {
+public class Specification extends ISpecification{
     @Id
     private String id;
-    @NotNull
-    private String name;
-    private List<CarSubSpecification> properties;
 }
+
+/*
+{
+  "exterior":{
+     "
+   }
+}
+ */

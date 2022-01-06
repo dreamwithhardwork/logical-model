@@ -11,9 +11,15 @@ import java.util.List;
 @Setter
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class CarSubSpecification {
-    private String name;
+    private String name;  // normal name for new cars else report details
     private PropertyDataType propertyDataType;
-    private String status;
-    private String value;
-    private List<Image> images;
+    private String status; // only used for variants
+    private String value; // value yes or no or desc for both reports
+    private List<Image> images; // images if any
 }
+
+/*
+{
+
+}
+ */

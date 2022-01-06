@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
+import org.models.core.enums.BodyType;
 import org.models.core.enums.FuelType;
 import org.models.core.enums.Transmission;
 import org.models.core.validators.ModelValidator;
+import org.models.core.validators.VariantValidator;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -26,46 +28,10 @@ import java.util.Map;
 @CompoundIndex(name = "variant_index", def = "{'_variantName':1, 'model':1, 'fromYear':1, 'toYear':1}", unique = true)
 @CompoundIndex(name = "variant_model", def = "{'_variantName':1, 'model':1}", unique = true)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class Variant {
-
-
+public class Variant extends IVariant{
     @Id
     private String _id;
-
     @NotNull
-    private String _variantName;
-
-    @NotNull
-    private String variantName;
-
-    @NotNull
-    private Transmission transmission;
-
-    @NotNull
-    private FuelType fuelType;
-
-    @NotEmpty
-    private String description;
-    @NotNull
-    private Integer fromYear;
-
-    private Integer toYear;
-    @NotNull
-    private String bodyType;
-
-    @NotNull
-    private String model;
-
-    @NotNull
-    private String make;
-
-    @NotNull
-    private Float exShowroomPrice;
-
-    private List<Image> interiorImages;
-    private List<Image> exteriorImages;
-
-
-    private List<Specification> specifications;
-
+    //@VariantValidator
+    private String _variantName; // variantname+year
 }

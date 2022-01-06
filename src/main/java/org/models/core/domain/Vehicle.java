@@ -5,11 +5,14 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.AutomobileType;
+import org.models.core.enums.FuelType;
 import org.models.core.enums.VehicleStatus;
 import org.models.core.location.Address;
 import org.models.core.location.RTO;
+import org.models.core.validators.ColorValidator;
 import org.models.core.validators.MakeValidator;
 import org.models.core.validators.VehicleValidator;
+import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
 import java.time.Month;
@@ -24,16 +27,20 @@ import java.util.List;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public abstract class Vehicle {
 
+    @Id
+    private String id;
     //to differentiate vehicle type
+    @NotNull
     private String type;
     @NotNull
     private Integer makeYear;
     private Month makeMonth;
+    @NotNull
     private Integer registrationYear;
     private Month registrationMonth;
 
     @NotNull
-    private Variant variant;
+    private IVariant variant;
 
     private String sellerId;
     private String buyerId;
@@ -54,18 +61,22 @@ public abstract class Vehicle {
     @NotNull
     private AutomobileType automobileType;
     private List<Image> sellerImages;
+    @NotNull
     private List<Image> primaryImages;
 
 
     private Date creationDate=new Date();
     private Date updatedDate;
     private Date soldDate;
+    @ColorValidator
     private String color;
     private Float sellingPrice;
     private Float costPrice;
     private Integer mileage;
     private Float price;
     private Address vehicleAddress;
+    @NotNull
+    private FuelType fuelType;
 
     @JsonIgnore
     private List<Booking> bookings;
