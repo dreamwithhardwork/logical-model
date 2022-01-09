@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.AutomobileType;
 import org.models.core.enums.FuelType;
+import org.models.core.enums.Transmission;
 import org.models.core.enums.VehicleStatus;
 import org.models.core.location.Address;
 import org.models.core.location.RTO;
@@ -80,5 +81,8 @@ public abstract class Vehicle {
 
     @JsonIgnore
     private List<Booking> bookings;
+
+    @NotNull
+    private Transmission transmission;
 
 }
