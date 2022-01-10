@@ -2,7 +2,9 @@ package org.models.core.validators.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.models.core.dao.ModelRepository;
 import org.models.core.domain.Make;
+import org.models.core.domain.Model;
 import org.models.core.domain.Variant;
 import org.models.core.domain.Vehicle;
 import org.models.core.error.model.MakeError;
@@ -22,7 +24,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Component
-public class ModelValidatorImpl implements ConstraintValidator<ModelValidator, Object> {
+public class ModelValidatorImpl implements ConstraintValidator<ModelValidator, String> {
 
     private static final Logger logger = LoggerFactory.getLogger(ModelValidatorImpl.class);
 
@@ -33,28 +35,21 @@ public class ModelValidatorImpl implements ConstraintValidator<ModelValidator, O
     @Autowired
     VehicleProperties vehicleProperties;
 
+    @Autowired
+    ModelRepository modelRepository;
+
     @Override
     public void initialize(ModelValidator constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(Object obj, ConstraintValidatorContext constraintValidatorContext) {
-        Map<String, Set<String>> make;
-        String makename = "" ,modelName="";
-        if(obj instanceof Vehicle)
-        {
-            makename = ((Vehicle)obj).getMake();
-            modelName = ((Vehicle)obj).getModel();
-        }
-        make = vehicleProperties.getMakemodelvariants().get(makename);
+    public boolean isValid(String modelName, ConstraintValidatorContext constraintValidatorContext) {
 
-
-        boolean valid = make.keySet().contains(modelName);
+        Model model =  modelRepository.findOneByName(modelName);
+        boolean valid = model !=null && model.getName().equals(modelName);
         if(!valid){
             try {
-                Set<String> models = make.keySet();
-                String errorMessage = objectMapper.writeValueAsString(MakeError.builder().message("Invalid Model type").
-                        availableTypes(models).build());
+                String errorMessage = objectMapper.writeValueAsString("Please create a new model first");
                 constraintValidatorContext.disableDefaultConstraintViolation();
                 constraintValidatorContext.buildConstraintViolationWithTemplate(errorMessage).addConstraintViolation();
             } catch (JsonProcessingException e) {

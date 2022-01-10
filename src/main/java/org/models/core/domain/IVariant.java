@@ -6,7 +6,11 @@ import lombok.Setter;
 import org.models.core.enums.BodyType;
 import org.models.core.enums.FuelType;
 import org.models.core.enums.Transmission;
+import org.models.core.validators.MakeValidator;
+import org.models.core.validators.ModelValidator;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -34,9 +38,11 @@ public class IVariant {
     private BodyType bodyType;
 
     @NotNull
+    @ModelValidator
     private String model;
 
     @NotNull
+    @MakeValidator
     private String make;
 
     @NotNull

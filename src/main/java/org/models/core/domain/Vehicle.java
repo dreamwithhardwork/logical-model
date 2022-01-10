@@ -10,11 +10,10 @@ import org.models.core.enums.Transmission;
 import org.models.core.enums.VehicleStatus;
 import org.models.core.location.Address;
 import org.models.core.location.RTO;
-import org.models.core.validators.ColorValidator;
-import org.models.core.validators.MakeValidator;
-import org.models.core.validators.VehicleValidator;
+import org.models.core.validators.*;
 import org.springframework.data.annotation.Id;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.Month;
 import java.util.Date;
@@ -31,7 +30,6 @@ public abstract class Vehicle {
     @Id
     private String id;
     //to differentiate vehicle type
-    @NotNull
     private String type;
     @NotNull
     private Integer makeYear;
@@ -41,6 +39,7 @@ public abstract class Vehicle {
     private Month registrationMonth;
 
     @NotNull
+    @VariantValidator
     private IVariant variant;
 
     private String sellerId;
@@ -58,6 +57,7 @@ public abstract class Vehicle {
     @MakeValidator
     private String make;
     @NotNull
+    @ModelValidator
     private String model;
     @NotNull
     private AutomobileType automobileType;

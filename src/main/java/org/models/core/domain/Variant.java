@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -23,15 +24,13 @@ import java.util.Map;
 
 @Getter
 @Setter
-@ModelValidator
 @Document
-@CompoundIndex(name = "variant_index", def = "{'_variantName':1, 'model':1, 'fromYear':1, 'toYear':1}", unique = true)
+@CompoundIndex(name = "variant_index", def = "{'_variantName':1, 'model':1, 'fromYear':1}", unique = true)
 @CompoundIndex(name = "variant_model", def = "{'_variantName':1, 'model':1}", unique = true)
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Variant extends IVariant{
     @Id
     private String _id;
-    @NotNull
-    //@VariantValidator
+
     private String _variantName; // variantname+year
 }

@@ -12,5 +12,6 @@ public interface VariantRepository extends MongoRepository<Variant,String> {
     List<Variant> findByModel(String model);
     Variant findOneByVariantNameAndFromYear(String name, Integer year);
     List<Variant> findByMakeAndModel(String make, String model);
+    Variant findOneBy_variantName(String name);
 
 }

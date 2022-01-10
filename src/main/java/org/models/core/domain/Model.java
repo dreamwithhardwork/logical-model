@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.models.core.validators.MakeValidator;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -59,6 +60,7 @@ public class Model {
     private Set<String> fuelTypes;
 
     @NotNull
+    @MakeValidator
     private String make;
 
     private String logoUrl;

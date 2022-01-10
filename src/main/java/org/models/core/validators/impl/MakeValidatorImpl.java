@@ -2,6 +2,8 @@ package org.models.core.validators.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.models.core.dao.MakeRepository;
+import org.models.core.domain.Make;
 import org.models.core.error.model.MakeError;
 import org.models.core.properies.VehicleProperties;
 import org.models.core.validators.MakeValidator;
@@ -22,6 +24,10 @@ public class MakeValidatorImpl implements ConstraintValidator<MakeValidator,Stri
     @Autowired
     VehicleProperties vehicleProperties;
 
+
+    @Autowired
+    MakeRepository makeRepository;
+
     @Autowired
     ObjectMapper objectMapper;
 
@@ -32,7 +38,9 @@ public class MakeValidatorImpl implements ConstraintValidator<MakeValidator,Stri
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        boolean isValid = vehicleProperties.getMakemodelvariants().keySet().contains(s);
+        boolean isValid = false;
+        Make make =  makeRepository.findOneByName(s);
+        isValid = make != null && make.getName().equals(s);
         if(!isValid)
         {
             try {
