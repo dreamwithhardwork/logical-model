@@ -1,12 +1,14 @@
 package org.models.core.dao;
 
 import org.models.core.domain.Booking;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface BookingRepository {
+@Repository
+public interface BookingRepository extends MongoRepository<Booking, String> {
 
-    Boolean save(String vehicleId, Booking booking);
     List<Booking> getAllBookingsById(String vehicleId);
 
 
