@@ -4,6 +4,7 @@ package org.models.core.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.MakeType;
@@ -37,6 +38,7 @@ public class Make {
 
     @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ApiModelProperty(hidden = true)
     private List<Model> models;
 
     private boolean isPopular;

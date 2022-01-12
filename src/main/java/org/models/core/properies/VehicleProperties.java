@@ -17,4 +17,6 @@ import java.util.Set;
 public class VehicleProperties {
     private List<String> color;
     private List<String> bodytype;
+    private List<String> fueltype;
+    private List<String> transmission;
 }
