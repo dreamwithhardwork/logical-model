@@ -12,7 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-@Component
+//@Component
 public class PropertiesListener implements ApplicationListener<ContextRefreshedEvent> {
 
 
@@ -24,7 +24,7 @@ public class PropertiesListener implements ApplicationListener<ContextRefreshedE
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        List<Make> makes = makeRepository.getAllMakes();
+       /* List<Make> makes = makeRepository.getAllMakes();
         makes = makes==null?new ArrayList<>():makes;
         Iterator it =  makes.iterator();
         while (it.hasNext()){
@@ -44,7 +44,7 @@ public class PropertiesListener implements ApplicationListener<ContextRefreshedE
                     }).collect(Collectors.toSet());
                 }
                 models.put(model.getName(),variants);
-            });
+            });*/
         }
     }
-}
+

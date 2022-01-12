@@ -44,11 +44,11 @@ public class MakeValidatorImpl implements ConstraintValidator<MakeValidator,Stri
         if(!isValid)
         {
             try {
-                String errorMessage = objectMapper.writeValueAsString(MakeError.builder().message("Invalid make type").
+                String errorMessage = "err"; /*objectMapper.writeValueAsString(MakeError.builder().message("Invalid make type").
                         availableTypes(vehicleProperties.getMakemodelvariants().keySet()).build());
-                constraintValidatorContext.disableDefaultConstraintViolation();
+                constraintValidatorContext.disableDefaultConstraintViolation();*/
                 constraintValidatorContext.buildConstraintViolationWithTemplate(errorMessage).addConstraintViolation();
-            } catch (JsonProcessingException e) {
+            } catch (Exception e) {
                 logger.error(e.getMessage());
             }
         }

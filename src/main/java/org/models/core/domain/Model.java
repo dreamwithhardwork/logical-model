@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.models.core.enums.BodyType;
 import org.models.core.validators.MakeValidator;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -36,7 +37,7 @@ public class Model {
     @NotNull
     private String description;
     @NotNull
-    private String bodyType;
+    private BodyType bodyType;
 
     private Map<String,List<Image>> imagesWithColors;
 
