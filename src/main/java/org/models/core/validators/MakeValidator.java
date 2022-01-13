@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD,ElementType.PARAMETER})
-@Constraint(validatedBy = ColorValidatorImpl.class)
+@Constraint(validatedBy = MakeValidatorImpl.class)
 public @interface MakeValidator {
     String message() default "Invalid Color";
     Class<?>[] groups() default {};
