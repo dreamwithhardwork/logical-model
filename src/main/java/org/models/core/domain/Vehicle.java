@@ -85,4 +85,6 @@ public abstract class Vehicle {
     @NotNull
     private Transmission transmission;
 
+    private List<Image> videos;
+
 }
