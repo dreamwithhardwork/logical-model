@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -67,5 +68,7 @@ public class Model {
     private String logoUrl;
 
     private  boolean isPopular;
+
+    private Date createdDate = new Date();
 
 }
