@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.models.core.enums.BookingStatus;
 import org.models.core.enums.BookingType;
+import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ import java.util.Date;
 public class Booking {
     @Email
     private String email;
+    @NotNull
     private String mobile;
     @NotNull
     private BookingType bookingType;
@@ -30,4 +32,9 @@ public class Booking {
 
     @NotNull
     private String vehicleId;
+    @NotNull
+    private String name;
+
+    @Id
+    private String _id;
 }
