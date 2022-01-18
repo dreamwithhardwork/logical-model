@@ -27,4 +27,7 @@ public class Booking {
     private Time time;
     private BookingStatus status;
     private String feedback;
+
+    @NotNull
+    private String vehicleId;
 }
